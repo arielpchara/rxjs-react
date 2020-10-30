@@ -20,9 +20,12 @@ export const StringFormatter: FC = () => {
   return (
     <>
       <div>
-        <input type="text" onChange={handleChange} value={input} />
+        <label>
+          <div>Input a text</div>
+          <input type="text" onChange={handleChange} value={input} />
+        </label>
       </div>
-      <h2>Formatted</h2>
+      <h2>Formatted text</h2>
       <pre>{JSON.stringify(formatted, null, 2)}</pre>
     </>
   );
