@@ -1,9 +1,9 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
-import { all$, sendMessage } from "./string";
+import { all$, getValue, sendMessage } from "./string";
 
 export const StringFormatter: FC = () => {
   const [formatted, setFormatted] = useState({});
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(getValue());
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);

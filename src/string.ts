@@ -1,10 +1,19 @@
-import { from, Subject, zip } from "rxjs";
-import { map, mergeMap } from "rxjs/operators";
+import { BehaviorSubject, from, Subject, zip } from "rxjs";
+import { map, mergeMap, tap } from "rxjs/operators";
 
-const main = new Subject<string>();
+const main = new BehaviorSubject<string>(
+  String(localStorage.getItem("message"))
+);
+
+export const getValue = () => {
+  return main.value;
+};
 
 export const clean$ = main.pipe(
-  map((incoming: string) => incoming.replace(/\W/g, " ").replace(/\s+/g, " "))
+  map((incoming: string) => incoming.replace(/\W/g, " ").replace(/\s+/g, " ")),
+  tap((cleaned) => {
+    localStorage.setItem("message", cleaned);
+  })
 );
 
 export const capital$ = clean$.pipe(
